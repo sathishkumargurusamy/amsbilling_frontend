@@ -1,0 +1,130 @@
+<div class='container'>
+    <div class="heading">
+        View Product
+    </div>
+    <mat-tab-group>
+        <mat-tab label="Motor">
+            <div class="filter-container">
+                <mat-form-field class="example-full-width form-control">
+                    <mat-label>
+                        <mat-icon style='margin-right:5px;'>search</mat-icon>Search</mat-label>
+                    <input matInput [(ngModel)]='search_motor' placeholder="Product Name" autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div class="table-container">
+                <table class="motor_table">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Stock</th>
+                        <th>Cost(per product)</th>
+                        <th>Total</th>
+                        <th>Options</th>
+                    </tr>
+                    <tr *ngFor='let prod of products| paginate:{itemsPerPage: 5, currentPage:p}|filterdata: search_motor : "product_name"  ,let i=index '>
+                        <td *ngIf='selectedIndex!=i && prod.is_motor'>{{prod.product_name}}</td>
+                        <td class='highlight_on ' *ngIf='selectedIndex===i && prod.is_motor'>
+                            <mat-form-field class="example-full-width form-control">
+                                <input matInput [(ngModel)]='prod.product_name' autocomplete="off">
+                            </mat-form-field>
+                        </td>
+                        <td style="white-space: pre-line" *ngIf='selectedIndex!=i && prod.is_motor '>{{prod.motor_description}}</td>
+                        <td class='highlight_on ' *ngIf='selectedIndex===i && prod.is_motor'>
+                            <mat-form-field class="example-full-width form-control">
+                                <textarea rows='5' matInput [(ngModel)]='prod.motor_description'></textarea>
+                            </mat-form-field>
+                        </td>
+
+                        <td *ngIf='selectedIndex!=i && prod.is_motor '>{{prod.stock}}</td>
+                        <td class=' highlight_on ' *ngIf='selectedIndex===i && prod.is_motor '>
+                            <mat-form-field class="example-full-width form-control">
+                                <input matInput [(ngModel)]='prod.stock' autocomplete="off">
+                            </mat-form-field>
+                        </td>
+
+                        <td *ngIf='selectedIndex!=i && prod.is_motor '>{{prod.cost|currency:'INR':true:"1.0-2"}}</td>
+                        <td class='highlight_on ' *ngIf='selectedIndex===i && prod.is_motor '>
+                            <mat-form-field class="example-full-width form-control">
+                                <input matInput [(ngModel)]='prod.cost' autocomplete="off">
+                            </mat-form-field>
+                        </td>
+
+                        <td *ngIf='selectedIndex!=i && prod.is_motor '>{{prod.cost*prod.stock|currency:'INR':true:"1.0-2"}}</td>
+                        <td class='highlight_on ' *ngIf='selectedIndex===i && prod.is_motor '>
+                            <mat-form-field class="example-full-width form-control">
+                                <input matInput value='{{prod.stock*prod.cost}} ' readonly autocomplete="off">
+                            </mat-form-field>
+                        </td>
+
+                        <td *ngIf='selectedIndex!=i && prod.is_motor '><button mat-raised-button color="accent" (click)='updateToggle(i,prod)'>Edit</button> &nbsp;
+                            <button mat-raised-button color="warn" (click)='deleteProduct(prod._id)'><mat-icon>delete</mat-icon></button></td>
+                        <td class='highlight_on ' *ngIf='selectedIndex===i && prod.is_motor '><button mat-raised-button color="primary" (click)='updateToggle(i,prod) '>Update</button> &nbsp;
+                            <button mat-raised-button color="warn" (click)='deleteProduct(prod._id)'><mat-icon>delete</mat-icon></button></td>
+
+                    </tr>
+                </table>
+                <div id="pagination">
+                    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Other Spares">
+            <div class="filter-container">
+                <mat-form-field class="example-full-width form-control">
+                    <mat-label>
+                        <mat-icon style='margin-right:5px;'>search</mat-icon>Search</mat-label>
+                    <input matInput [(ngModel)]='search_other' placeholder="Product Name" autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div class="table-container">
+                <table class="other_table">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Stock</th>
+                        <th>Cost(per product)</th>
+                        <th>Total</th>
+                        <th>Options</th>
+                    </tr>
+                    <tr *ngFor='let prod of products| paginate:{itemsPerPage: 5, currentPage:p}|filterdata: search_other : "product_name"  ,let i=index '>
+                        <td *ngIf='selectedIndex!=i && !prod.is_motor '>{{prod.product_name}} </td>
+                        <td class='highlight_on ' *ngIf='selectedIndex===i && !prod.is_motor'>
+                            <mat-form-field class="example-full-width form-control">
+                                <input matInput [(ngModel)]='prod.product_name' autocomplete="off">
+                            </mat-form-field>
+                        </td>
+
+                        <td *ngIf='selectedIndex!=i && !prod.is_motor '>{{prod.stock}}</td>
+                        <td class=' highlight_on ' *ngIf='selectedIndex===i && !prod.is_motor '>
+                            <mat-form-field class="example-full-width form-control">
+                                <input matInput [(ngModel)]='prod.stock' autocomplete="off">
+                            </mat-form-field>
+                        </td>
+
+                        <td *ngIf='selectedIndex!=i && !prod.is_motor '>{{prod.cost|currency:'INR':true:"1.0-2"}}</td>
+                        <td class='highlight_on ' *ngIf='selectedIndex===i && !prod.is_motor '>
+                            <mat-form-field class="example-full-width form-control">
+                                <input matInput [(ngModel)]='prod.cost' autocomplete="off">
+                            </mat-form-field>
+                        </td>
+
+                        <td *ngIf='selectedIndex!=i && !prod.is_motor '>{{prod.cost*prod.stock|currency:'INR':true:"1.0-2"}}</td>
+                        <td class='highlight_on ' *ngIf='selectedIndex===i && !prod.is_motor '>
+                            <mat-form-field class="example-full-width form-control">
+                                <input matInput value='{{prod.stock*prod.cost}} ' readonly autocomplete="off">
+                            </mat-form-field>
+                        </td>
+
+                        <td *ngIf='selectedIndex!=i && !prod.is_motor '><button mat-raised-button color="accent" (click)='updateToggle(i,prod)'>Edit</button> &nbsp;
+                            <button mat-raised-button color="warn" (click)='deleteProduct(prod._id)'><mat-icon>delete</mat-icon></button></td>
+                        <td class='highlight_on ' *ngIf='selectedIndex===i && !prod.is_motor '><button mat-raised-button color="primary" (click)='updateToggle(i,prod) '>Update</button> &nbsp;
+                            <button mat-raised-button color="warn" (click)='deleteProduct(prod._id)'><mat-icon>delete</mat-icon></button></td>
+                    </tr>
+                </table>
+                <div id="pagination">
+                    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

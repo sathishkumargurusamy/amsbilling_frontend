@@ -1,0 +1,38 @@
+<div class='container'>
+    <div class="heading">
+        Add Product
+    </div>
+    <div class='form-container'>
+        <mat-form-field class="example-full-width form-control">
+            <mat-label>Product Name</mat-label>
+            <input matInput [(ngModel)]='pname' placeholder="Ex. Motor" autocomplete="off">
+        </mat-form-field>
+        <br>
+        <mat-checkbox class='form-control' (change)='isMotorToggle()'>Motor</mat-checkbox>
+        <br>
+        <mat-form-field class="example-full-width form-control" *ngIf="isMotor">
+            <mat-label>Motor Description</mat-label>
+            <textarea matInput [(ngModel)]='motordescp'></textarea>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width form-control">
+            <mat-label>Stock</mat-label>
+            <input matInput [(ngModel)]='stock' type="number" placeholder="Ex. 20" autocomplete="off">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width form-control">
+            <mat-label>Price Per Product (Rupees)</mat-label>
+            <input matInput [(ngModel)]='cost' type="number" placeholder="2000" autocomplete="off">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width form-control" *ngIf='cost && stock'>
+            <mat-label>Total Price</mat-label>
+            <input matInput value='{{cost*stock}}' type="number" autocomplete="off">
+        </mat-form-field>
+        <div class='buttons'>
+            <button class='button' mat-raised-button color="primary" [disabled]='!cost || !pname || !stock' (click)='addProduct()'>Add</button>
+            <br>
+            <button class='button' mat-raised-button color="warn" (click)='clearFields()'>Clear</button>
+        </div>
+    </div>
+</div>

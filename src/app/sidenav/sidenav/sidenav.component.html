@@ -1,0 +1,23 @@
+<mat-drawer-container class="example-container">
+    <mat-drawer class='sidenav' mode="side" opened>
+        <div class=logo>
+
+        </div>
+        <mat-list class='list'>
+            <mat-list-item class='list_item' routerLink="">
+                <mat-icon style='color:white;margin-right:8px;'>dashboard</mat-icon> Dashboard </mat-list-item>
+            <mat-list-item class='list_item'>
+                <mat-icon style='color:white;margin-right:8px;'>shopping_cart</mat-icon>
+                <p mat-button [matMenuTriggerFor]="product">
+                    Product</p>
+                <mat-menu #product="matMenu">
+                    <button mat-menu-item routerLink="add-product">Add Product</button>
+                    <button mat-menu-item routerLink="view-product">View Product</button>
+                </mat-menu>
+            </mat-list-item>
+        </mat-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

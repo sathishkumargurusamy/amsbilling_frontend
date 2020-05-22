@@ -1,0 +1,27 @@
+.example-container {
+    height: 100%;
+    width: 100%;
+}
+
+.logo {
+    padding: 20px;
+    height: 120px;
+    background: url("../../../assets/ams.png");
+    width: 100%;
+    background-size: cover;
+    margin-bottom: 20px;
+}
+
+.sidenav {
+    width: 13%;
+    background-color: rgb(248, 192, 192);
+    box-shadow: 1px 2px 1px 1px grey;
+    color: black;
+}
+
+.list_item {
+    color: black !important;
+    font-size: 18px;
+    box-shadow: 0px 1px 0px 0px rgb(105, 103, 103);
+    cursor: pointer;
+}
