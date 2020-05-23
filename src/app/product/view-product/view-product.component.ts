@@ -25,6 +25,13 @@ export class ViewProductComponent implements OnInit {
     this.prodServ.updateProduct(body).subscribe(data=>{
       this.getAllProduct();
     })
+  } 
+  deleteProduct(id){
+      if(confirm("Are you sure want to delete?")) {
+        this.prodServ.deleteProduct(id).subscribe(data=>{
+          this.getAllProduct();
+        })
+      }
   }
   updateToggle(i,body){
     if(this.selectedIndex!=i){

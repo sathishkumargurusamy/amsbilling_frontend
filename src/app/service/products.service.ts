@@ -6,7 +6,7 @@ import {Product} from '../models/product';
   providedIn: 'root'
 })
 export class ProductsService {
-  public api='http://localhost:3000/api/products';
+  public api='https://amsbillingserver.herokuapp.com/api/products';
   constructor(private http:HttpClient) { }
 
 getAllProducts(){
@@ -19,6 +19,10 @@ addNewProduct(body){
 
 updateProduct(body){
   return this.http.put(this.api+'/'+body._id,body);
+}
+
+deleteProduct(id){
+  return this.http.delete(this.api+'/'+id);
 }
 
 }

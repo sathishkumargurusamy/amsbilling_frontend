@@ -23,6 +23,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterdataPipe } from '../../src/app/service/SearchFilterPipe';
 import { MatTabsModule } from '@angular/material/tabs';
 
+
 @NgModule({
   declarations: [
     AppComponent,
